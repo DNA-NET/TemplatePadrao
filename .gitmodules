@@ -1,0 +1,3 @@
+[submodule "Shell-Make"]
+	path = Shell-Make
+	url = https://github.com/AeonDigital/Shell-Make.git
