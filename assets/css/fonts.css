@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'GothamRnd-Medium';
+    src: url('../fonts/GothamRnd-Medium.otf') format('opentype');
+    font-weight: 900;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: 'GothamRnd-MedIta';
+    src: url('../fonts/GothamRnd-MedIta.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GothamRnd-LightIta';
+    src: url('../fonts/GothamRnd-LightIta.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GothamRnd-Light';
+    src: url('../fonts/GothamRnd-Light.otf') format('opentype');
+    font-weight:lighter;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GothamRnd-BookIta';
+    src: url('../fonts/GothamRnd-BookIta.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GothamRnd-Book';
+    src: url('../fonts/GothamRnd-Book.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GothamRnd-BoldIta';
+    src: url('../fonts/GothamRnd-BoldIta.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GothamRnd-Bold';
+    src: url('../fonts/GothamRnd-Bold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GothamRnd-BlackItalic';
+    src: url('../fonts/GothamRnd-BlackItalic.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GothamRnd-Black';
+    src: url('../fonts/GothamRnd-Black.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'GothamRnd-Ultra';
+    src: url('../fonts/GothamRnd-Ultra.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .ultra{
+    font-family: 'GothamRnd-Ultra';
+}
+.black{
+  font-family: 'GothamRnd-Black';
+}
+.black-ita{
+  font-family: 'GothamRnd-BlackItalic';
+}
+.bold{
+  font-family: 'GothamRnd-Bold';
+}
+.bold-ita{
+  font-family: 'GothamRnd-BoldIta';
+}
+.book{
+  font-family: 'GothamRnd-Book';
+}
+.book-ita{
+  font-family: 'GothamRnd-BookIta';
+}
+.light{
+  font-family: 'GothamRnd-Light';
+}
+.light-ita{
+  font-family: 'GothamRnd-LightIta';
+}
+.medium{
+  font-family: 'GothamRnd-Medium';
+}
+.medium-ita{
+  font-family: 'GothamRnd-MediumIta';
+}

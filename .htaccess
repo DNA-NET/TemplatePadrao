@@ -1,0 +1,11 @@
+RewriteOptions inherit
+RewriteEngine On
+Options All -Indexes +FollowSymLinks
+# Redirecionamento para  HTTPS
+# RewriteCond %{SERVER_PORT} ^80$
+# RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Only redirect to error for files that don't exist
+RewriteRule ^(.*)$ portal/interna.php [L]

@@ -1,0 +1,12 @@
+[Upload]
+ERR_UPLOAD_001 = "File type not allowed."
+ERR_UPLOAD_002 = "Fail to upload, check permission or upload size."
+ERR_UPLOAD_003 = "Fail to upload, original message: "
+ERR_UPLOAD_004 = "Fail to upload, exceeds max file size. "
+
+[File Operations]
+ERR_FILEOP_001 = "Fail creating folder. Permission or invalid characters."
+ERR_FILEOP_002 = "Folder doesn't exists."
+
+ERR_FILEOP_003 = "Name already exists or invalid file name."
+ERR_FILEOP_004 = "Fail renaming file/folder name."

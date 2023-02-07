@@ -1,0 +1,20 @@
+.data { text-decoration: none; color: #7F7D77; font-size: 10px; font-family: verdana; font-style: normal}
+.frmCinza { font-family:Arial; font-size:10px; color:#555555; background-color:#e0e0e0; border:1px solid; border-color:#666666; height:19px;} a.frmCinza { font-family:Arial; font-size:10px; color:#555555; background-color:#e0e0e0; border:1px solid; border-color:#666666; text-decoration: none; font-weight: none; height:19px;}
+
+.titulo_corpo {
+	background-repeat: no-repeat;
+	background-position: 2px 4px;
+	float: left;
+	width: 669px;
+	padding-left: 30px;
+	/*background-color: #d9dadc;*/
+	padding-top: 2px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+	color: #1e549e;
+	margin-top: 3px;
+	margin-right: 0px;
+	margin-bottom: 3px;
+	margin-left: 0px;
+	font-size: 14px;
+}
