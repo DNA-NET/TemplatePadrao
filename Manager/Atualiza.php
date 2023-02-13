@@ -2667,9 +2667,10 @@ function Registra_Visita($sessionID)
 
             $stmt->close();
         } else {
+            $funcionarios_id = (isset($_SESSION["Funcionarios_id"]) === true) ? (int)$_SESSION["Funcionarios_id"] : "NULL";
             $strSQL = " UPDATE visitante
                             SET
-                                visitante_data_fim=NOW()
+                                visitante_data_fim=NOW(), funcionarios_id=$funcionarios_id
                             WHERE
                                 visitante_id=$visitante_id;";
             mysqli_query($con, $strSQL);
