@@ -2645,7 +2645,7 @@ function Registra_Visita($sessionID)
 
 
             $curlRequest = curl_init();
-            curl_setopt($curlRequest, CURLOPT_URL, getenv("ATUALIZA_IP_DATA_PROVIDER") . $visitante_ip);
+            curl_setopt($curlRequest, CURLOPT_URL, str_replace("[[IP]]", $visitante_ip, getenv("ATUALIZA_IP_DATA_PROVIDER")));
             curl_setopt($curlRequest, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($curlRequest, CURLOPT_CONNECTTIMEOUT, 5);
             $curlResponse = curl_exec($curlRequest);
