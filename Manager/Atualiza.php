@@ -2581,7 +2581,14 @@ function Registra_Visita($sessionID)
 
     $visitante_session_hash = $sessionID;
     $visitante_navegador = $_SERVER["HTTP_USER_AGENT"];
+    $visitante_dispositivo = "Desktop";
     $visitante_ip = get_client_ip();
+
+
+    $regExp = '/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i';
+    if (preg_match($regExp, $visitante_navegador)) {
+        $visitante_dispositivo = "Mobile";
+    }
 
 
     if ($visitante_ip !== "UNKNOW") {
@@ -2617,21 +2624,22 @@ function Registra_Visita($sessionID)
 
             $strSQL = " INSERT INTO visitante
                             (
-                                visitante_session_hash, visitante_navegador, visitante_ip,
+                                visitante_session_hash, visitante_navegador, visitante_dispositivo, visitante_ip,
                                 visitante_ip_cidade, visitante_ip_regiao, visitante_ip_pais, visitante_ip_postal, visitante_ip_loc,
                                 visitante_resolucao
                             )
                             VALUES
                             (
-                                ?, ?, ?,
+                                ?, ?, ?, ?,
                                 ?, ?, ?, ?, ?,
                                 ?
                             );";
             $stmt = $con->prepare($strSQL);
             $stmt->bind_param(
-                "sssssssss",
+                "ssssssssss",
                 $visitante_session_hash,
                 $visitante_navegador,
+                $visitante_dispositivo,
                 $visitante_ip,
 
                 $visitante_ip_cidade,
