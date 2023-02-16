@@ -2575,22 +2575,38 @@ function Prepara_URL_Amigavel_atualiza($url)
 
 function Registra_Visita($sessionID)
 {
+    require_once '../vendor/autoload.php';
+
     global $con;
     $stmt = null;
     $visitante_id = null;
 
     $visitante_session_hash = $sessionID;
-    $visitante_navegador = $_SERVER["HTTP_USER_AGENT"];
+    $visitante_useragent = $_SERVER["HTTP_USER_AGENT"];
+
+    $uaParser = \UAParser\Parser::create();
+    $browserData = $uaParser->parse($visitante_useragent);
+
+    $visitante_navegador = $browserData->ua->family;
+    $visitante_navegador_versao = $browserData->ua->major;
+    if ((string)$browserData->ua->minor !== "") {
+        $visitante_navegador_versao .= "." . $browserData->ua->minor;
+    }
+
+    $visitante_os = $browserData->os->family;
+    $visitante_os_versao = $browserData->os->major;
+    if ((string)$browserData->os->minor !== "") {
+        $visitante_os_versao .= "." . $browserData->os->minor;
+    }
+
     $visitante_dispositivo = "Desktop";
-    $visitante_ip = get_client_ip();
-
-
     $regExp = '/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i';
     if (preg_match($regExp, $visitante_navegador)) {
         $visitante_dispositivo = "Mobile";
     }
 
 
+    $visitante_ip = get_client_ip();
     if ($visitante_ip !== "UNKNOW") {
         $yesterday = new DateTime();
         $yesterday->sub(new DateInterval("P1D"));
@@ -2620,35 +2636,37 @@ function Registra_Visita($sessionID)
             $visitante_ip_pais = null;
             $visitante_ip_postal = null;
             $visitante_ip_loc = null;
-            $visitante_resolucao = null;
 
             $strSQL = " INSERT INTO visitante
                             (
-                                visitante_session_hash, visitante_navegador, visitante_dispositivo, visitante_ip,
-                                visitante_ip_cidade, visitante_ip_regiao, visitante_ip_pais, visitante_ip_postal, visitante_ip_loc,
-                                visitante_resolucao
+                                visitante_session_hash, visitante_useragent,
+                                visitante_navegador, visitante_navegador_versao, visitante_os, visitante_os_versao, visitante_dispositivo,
+                                visitante_ip, visitante_ip_cidade, visitante_ip_regiao, visitante_ip_pais, visitante_ip_postal, visitante_ip_loc
                             )
                             VALUES
                             (
-                                ?, ?, ?, ?,
+                                ?, ?,
                                 ?, ?, ?, ?, ?,
-                                ?
+                                ?, ?, ?, ?, ?, ?
                             );";
             $stmt = $con->prepare($strSQL);
             $stmt->bind_param(
-                "ssssssssss",
+                "sssssssssssss",
                 $visitante_session_hash,
-                $visitante_navegador,
-                $visitante_dispositivo,
-                $visitante_ip,
+                $visitante_useragent,
 
+                $visitante_navegador,
+                $visitante_navegador_versao,
+                $visitante_os,
+                $visitante_os_versao,
+                $visitante_dispositivo,
+
+                $visitante_ip,
                 $visitante_ip_cidade,
                 $visitante_ip_regiao,
                 $visitante_ip_pais,
                 $visitante_ip_postal,
-                $visitante_ip_loc,
-
-                $visitante_resolucao
+                $visitante_ip_loc
             );
 
 
@@ -2718,24 +2736,34 @@ function Atualiza_Visita($sessionID, $jsonData)
         $visitante_id = (int)$row["visitante_id"];
 
         if ($visitante_id !== null) {
-            $displayInfo = json_encode($jsonData["displayInfo"]);
-            $strSQL = " UPDATE visitante
-                            SET
-                                visitante_resolucao='$displayInfo'
-                            WHERE
-                                visitante_id=$visitante_id AND
-                                visitante_resolucao IS NULL;";
-            mysqli_query($con, $strSQL);
+            $visitante_tela_largura = (int)$jsonData["displayInfo"]["sizeScreenWidth"];
+            $visitante_tela_altura = (int)$jsonData["displayInfo"]["sizeScreenHeight"];
+            $visitante_janela_largura = (int)$jsonData["displayInfo"]["sizeWindowWidth"];
+            $visitante_janela_altura = (int)$jsonData["displayInfo"]["sizeWindowHeight"];
+            $visitante_profundidade_cor = (int)$jsonData["displayInfo"]["colorDepth"];
+            $visitante_profundidade_pixel = (int)$jsonData["displayInfo"]["pixelDepth"];
 
+            $strSQL = " UPDATE visitante
+                                SET
+                                    visitante_tela_largura=$visitante_tela_largura,
+                                    visitante_tela_altura=$visitante_tela_altura,
+                                    visitante_janela_largura=$visitante_janela_largura,
+                                    visitante_janela_altura=$visitante_janela_altura,
+                                    visitante_profundidade_cor=$visitante_profundidade_cor,
+                                    visitante_profundidade_pixel=$visitante_profundidade_pixel
+                                WHERE
+                                    visitante_id=$visitante_id AND
+                                    visitante_tela_largura IS NULL;";
+            mysqli_query($con, $strSQL);
 
 
             // Encerra data de visita de uma pagina anteriormente aberta.
             $strSQL = " UPDATE visitante_pagina
-                            SET
-                                visitante_pagina_data_fim=NOW()
-                            WHERE
-                                visitante_id=$visitante_id AND
-                                visitante_pagina_data_fim IS NULL;";
+                                SET
+                                    visitante_pagina_data_fim=NOW()
+                                WHERE
+                                    visitante_id=$visitante_id AND
+                                    visitante_pagina_data_fim IS NULL;";
             mysqli_query($con, $strSQL);
 
 
