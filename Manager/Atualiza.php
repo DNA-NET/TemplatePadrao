@@ -309,7 +309,7 @@ function Busca_secao_nome2($nivel)
             return "";
         }
     } catch (Exception $e) {
-        acumula_erro("Erro Busca_secao_nome " . nivel . "> " . $e->getMessage());
+        acumula_erro("Erro Busca_secao_nome " . $nivel . "> " . $e->getMessage());
         return 0;
     }
 }
@@ -349,7 +349,7 @@ function Seq_MDB($tabela_nome)
 function Conteudo($Conteudo_campo)
 {
 
-    global $Dominio_url_producao, $banco_dados, $Caminho_fisico_Cache, $con;
+    global $Dominio_url_producao, $Dominio_url_Atualiza, $Dominio_id_Atualiza, $banco_dados, $Caminho_fisico_Cache, $con;
 
     $_SESSION["Mascara_id"] = "";
 
@@ -487,14 +487,6 @@ function Conteudo($Conteudo_campo)
                                 if ($row["CONTEUDO_CACHE"] == "dia") $CONTEUDO_CACHE_data = " getdate() + 1 ";
                                 if ($row["CONTEUDO_CACHE"] == "semana") $CONTEUDO_CACHE_data = " getdate() + 7 ";
                                 if ($row["CONTEUDO_CACHE"] == "mes") $CONTEUDO_CACHE_data = " getdate() + 30 ";
-                            }
-                            if ($banco_dados == "ACCESS") {
-                                $CONTEUDO_CACHE_data = " #" . strtotime(Today()) . "# ";
-                                if ($row["CONTEUDO_CACHE"] == "15 min") $CONTEUDO_CACHE_data = " #" . strtotime(Today()) . "# + 0.01 ";
-                                if ($row["CONTEUDO_CACHE"] == "hora") $CONTEUDO_CACHE_data = " #" . strtotime(Today()) . "# + 0.05 ";
-                                if ($row["CONTEUDO_CACHE"] == "dia") $CONTEUDO_CACHE_data = " #" . strtotime(Today()) . "# + 1 ";
-                                if ($row["CONTEUDO_CACHE"] == "semana") $CONTEUDO_CACHE_data = " #" . strtotime(Today()) . "# + 7 ";
-                                if ($row["CONTEUDO_CACHE"] == "mes") $CONTEUDO_CACHE_data = " #" . strtotime(Today()) . "# + 30 ";
                             }
                             if ($banco_dados = "ORACLE") {
                                 $CONTEUDO_CACHE_data = " SYSDATE ";
@@ -688,7 +680,6 @@ function Conteudo($Conteudo_campo)
                             if ($row["MASCARA_ID"] != "0") $Sql = $Sql . " and institucional.Mascara_id = " . $row["MASCARA_ID"] . "  ";
 
                             if ($banco_dados == "SQL_SERVER") $Sql = $Sql . " and institucional.Institucional_status = 'Publicado' and ((INSTITUCIONAL_VAL_CONTEUDO = 0) or ((INSTITUCIONAL_VAL_CONTEUDO = 1) and ( Getdate() between Institucional_data_inicial and Institucional_data_expira))) ";
-                            if ($banco_dados == "ACCESS") $Sql = $Sql . " and institucional.Institucional_status = 'Publicado' and ((INSTITUCIONAL_VAL_CONTEUDO = 0) or ((INSTITUCIONAL_VAL_CONTEUDO = 1) and ( #" . strtotime(Today()) . "# between Institucional_data_inicial and Institucional_data_expira))) ";
                             if ($banco_dados == "ORACLE") $Sql = $Sql . " and institucional.Institucional_status = 'Publicado' and ((INSTITUCIONAL_VAL_CONTEUDO = 0) or ((INSTITUCIONAL_VAL_CONTEUDO = 1) and ( SYSDATE  between Institucional_data_inicial and Institucional_data_expira))) ";
                             if ($banco_dados == "MySql") $Sql = $Sql . " and institucional.Institucional_status = 'Publicado' and ((INSTITUCIONAL_VAL_CONTEUDO = 0) or ((INSTITUCIONAL_VAL_CONTEUDO = 1) and ( CURDATE()  between Institucional_data_inicial and Institucional_data_expira))) ";
 
@@ -778,7 +769,6 @@ function Conteudo($Conteudo_campo)
 
                                     $Data_consulta = "";
                                     if ($banco_dados == "SQL_SERVER") $Data_consulta = " Getdate() ";
-                                    if ($banco_dados == "ACCESS") $Data_consulta = " #" . strtotime(Today()) . "# ";
                                     if ($banco_dados == "ORACLE") $Data_consulta = " SYSDATE ";
                                     if ($banco_dados == "MySql") $Data_consulta = " CURDATE() ";
 
@@ -898,7 +888,6 @@ function Conteudo($Conteudo_campo)
                             if ($ordem == "") $ordem = " institucional.Institucional_id asc ";
 
                             if ($banco_dados == "SQL_SERVER") $Sql = $Sql . " and institucional.Institucional_status = 'Publicado' and ((INSTITUCIONAL_VAL_CONTEUDO = 0) or ((INSTITUCIONAL_VAL_CONTEUDO = 1) and ( Getdate()  between Institucional_data_inicial and Institucional_data_expira))) ORDER BY " . $ordem;
-                            if ($banco_dados == "ACCESS") $Sql = $Sql . " and institucional.Institucional_status = 'Publicado' and ((INSTITUCIONAL_VAL_CONTEUDO = 0) or ((INSTITUCIONAL_VAL_CONTEUDO = 1) and ( #" . strtotime(Today()) . "#  between Institucional_data_inicial and Institucional_data_expira))) ORDER BY " . $ordem;
                             if ($banco_dados == "ORACLE") $Sql = $Sql . " and institucional.Institucional_status = 'Publicado' and ((INSTITUCIONAL_VAL_CONTEUDO = 0) or ((INSTITUCIONAL_VAL_CONTEUDO = 1) and ( SYSDATE  between Institucional_data_inicial and Institucional_data_expira))) ORDER BY " . $ordem;
                             if ($banco_dados == "MySql") $Sql = $Sql . " and institucional.Institucional_status = 'Publicado' and ((INSTITUCIONAL_VAL_CONTEUDO = 0) or ((INSTITUCIONAL_VAL_CONTEUDO = 1) and ( CURDATE()  between Institucional_data_inicial and Institucional_data_expira))) ORDER BY " . $ordem;
 
@@ -1939,7 +1928,7 @@ function Link_secao($secao_id, $campo)
 
 function Verifica_CONTEUDO_EXPIRADO($CONTEUDO_AVISA_EDITOR, $Institucional_id, $Funcionarios_id, $Institucional_data_expira, $Institucional_nome)
 {
-
+    global $con;
     $data_expira_conteudo = "";
     $Corpo_email = "";
 
@@ -2565,7 +2554,7 @@ function Gera_URL_Amigavel()
 function Prepara_URL_Amigavel_atualiza($url)
 {
     $url_tratada = str_replace(",", "/", str_replace(">", "/", str_replace(" ", "-", trim($url))));
-    return strtolower(preg_replace('/[`^~\'"]/', null, iconv('UTF-8', 'ASCII//TRANSLIT', $url_tratada)));
+    return strtolower(preg_replace('/[`^~\'"]/', "", iconv('UTF-8', 'ASCII//TRANSLIT', $url_tratada)));
 }
 
 
