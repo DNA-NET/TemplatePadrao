@@ -2528,19 +2528,19 @@ function Gera_URL_Amigavel()
 
 ?>
 
-                <script type="text/javascript">
-                    var stateObj = {
-                        foo: "<?php echo $URL_amigavel ?>"
-                    };
+<script type="text/javascript">
+var stateObj = {
+    foo: "<?php echo $URL_amigavel ?>"
+};
 
-                    function change_my_url() {
-                        history.pushState(stateObj, "page 2", "<?php echo $URL_amigavel ?>");
-                    }
+function change_my_url() {
+    history.pushState(stateObj, "page 2", "<?php echo $URL_amigavel ?>");
+}
 
-                    window.onload = function() {
-                        change_my_url()
-                    };
-                </script>
+window.onload = function() {
+    change_my_url()
+};
+</script>
 
 <?php
 
@@ -2564,8 +2564,6 @@ function Prepara_URL_Amigavel_atualiza($url)
 
 function Registra_Visita($sessionID)
 {
-    require_once '../vendor/autoload.php';
-
     global $con;
     $stmt = null;
     $visitante_id = null;
