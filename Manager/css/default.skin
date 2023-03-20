@@ -1,3 +1,0 @@
-<asp:Button runat="server" class="atualiza_button" />
-<asp:TextBox runat="server" class="input_box" />
-<asp:DropDownList runat="server" class="input_box" />
