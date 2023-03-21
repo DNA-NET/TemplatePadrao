@@ -1,0 +1,535 @@
+.xf-manager {
+    position: relative;
+    font-family: helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.xf-manager input[type="text"] {
+    padding: 7px 8px 6px 8px;
+    border: #d8d8d8 1px solid;
+    border-radius: 3px;
+}
+
+.xf-top {
+    background-color: #f4f4f4;
+    padding: 12px 8px;
+    position: fixed;
+    width: 100%; 
+    top: 0px;
+    left: 0px;
+    z-index: 999;
+}
+
+.xf-content {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    position: relative;
+    border: #d8d8d8 0px solid;
+    box-sizing: border-box;
+    min-height: 450px;
+}
+
+.xf-thumbnails {
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    border: #d8d8d8 0px solid;
+    box-sizing: border-box;    
+}
+
+.xf-sel-folder {
+    display: inline-block;
+    background-color: #ffffff;
+    border-radius: 3px;
+    border: #d8d8d8 1px solid;
+    padding: 7px 8px 6px 8px;
+    max-width: 200px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    vertical-align: bottom;
+    color: #686868;
+}
+
+.xf-folder-drop {
+    position:fixed;
+    display: none;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: #000000 1px solid;    
+    color: #ffffff;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 100%;
+    width: 250px;
+}
+
+.xf-folder-drop .xf-folder-item {
+    display: block;
+    margin: 1px;
+    cursor: pointer;    
+    padding: 6px;
+    border-bottom: #383838 1px solid;
+    
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    -o-transition: all 0.4s;
+}
+
+.xf-folder-drop .xf-folder-item:hover {
+    background-color: rgba(220,220,220,0.8);
+}
+
+.xf-folder-drop .xf-folder-selected {
+     background-color: rgba(50,163,167,0.8);
+}
+
+.xf-folder-drop .xf-folder-selected:hover {
+    background-color: rgba(108,210,210,0.8) !important;
+}
+
+.xf-folder-drop .xf-level0 { padding-left: 2px; }
+.xf-folder-drop .xf-level1 { padding-left: 24px; }
+.xf-folder-drop .xf-level2 { padding-left: 48px; }
+.xf-folder-drop .xf-level3 { padding-left: 72px; }
+.xf-folder-drop .xf-level4 { padding-left: 96px; }
+.xf-folder-drop .xf-level5 { padding-left: 120px; }
+.xf-folder-drop .xf-level6 { padding-left: 144px; }
+.xf-folder-drop .xf-level7 { padding-left: 168px; }
+.xf-folder-drop .xf-level8 { padding-left: 192px; }
+.xf-folder-drop .xf-level9 { padding-left: 226px; }
+.xf-folder-drop .xf-level10 { padding-left: 250px; }
+
+
+.xf-thumbnail {
+    display: inline-block;
+    border: #e8e8e8 1px solid;
+    width: 150px;
+    height: 120px;
+    overflow: hidden;
+    margin: 4px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 11px;
+    border-radius: 6px;
+    background-color: #f4f4f4;
+}
+
+.xf-thumbnail-selected {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 15px #000000;
+}
+
+.xf-thumblay {
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0; left:0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+    transition: all 0.6s;
+    -o-transition: all 0.6s;    
+}
+
+.xf-thumbnail:hover .xf-thumblay{
+    opacity: 1 !important;    
+}
+
+.xf-thumbchecked {
+    display: none;
+    position: absolute;
+    top: 0px; left: 0px;
+    padding:8px;
+    color: #ffffff;
+    font-size: 1.4em;
+    border-radius: 4px;
+    /*box-shadow: 2px 2px 5px #383838;*/
+    background-color: rgba(0, 0, 0, 0.8);
+    border: #383838 1px solid;
+}
+
+.xf-thumbnail-selected .xf-thumbchecked {
+    display: block !important;
+}
+
+a.xf-thumbitem {
+    display: block;
+    border: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+a.xf-thumbitem img {
+    width: auto;
+    height: 100%;
+}
+
+.xf-thumbfooter {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding: 5px 0px;
+    background-color: rgba(0,0,0,0.6);
+    text-align: center;
+}
+
+.xf-thumbinfo {
+    color: #ffffff;
+    padding: 2px 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0px 5px;
+}
+
+.xf-thumbtype {
+    position: absolute;
+    top: 25%;
+    left: 15px;
+    background-color: rgba(50,163,167,0.8);
+    padding: 5px 0px;
+    font-size: 1.1em;
+    color: #ffffff;
+    width: 40px;
+    text-align: center;
+    /*box-shadow: 2px 2px 5px #888888;*/
+}
+
+.xf-thumbfilescount {
+    position:absolute;
+    /*width:100%;
+    text-align: center;*/
+    font-size: 36px;
+    color: #e0e0e0; 
+    opacity: 0.8;
+    top: 35px;
+    right: 25px;
+    margin: auto;
+}
+
+a.xf-delete {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    cursor: pointer;
+    padding-top: 3px;
+    color: #989898;
+    font-size: 1.4em;
+    
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+    transition: all 0.6s;
+    -o-transition: all 0.6s;
+}
+
+a.xf-delete:hover {
+    /*background-color: #32a3a7;
+    border-radius: 3px;*/
+    color: #ffffff;
+}
+
+a.xf-rename {
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    cursor: pointer;
+    padding-top: 3px;
+    color: #989898;
+    font-size: 1.4em;
+    
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+    transition: all 0.6s;
+    -o-transition: all 0.6s;
+}
+
+a.xf-rename:hover {
+    /*background-color: #32a3a7;
+    border-radius: 3px;*/
+    color: #ffffff;
+}
+
+a.xf-edit {
+    position: absolute;
+    right: 40px;
+    top: 0px;
+    cursor: pointer;
+    padding-top: 3px;
+    color: #989898;
+    font-size: 1.4em;
+    
+    -webkit-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+    transition: all 0.6s;
+    -o-transition: all 0.6s;
+}
+
+a.xf-edit:hover {
+    /*background-color: #32a3a7;
+    border-radius: 3px;*/
+    color: #ffffff;
+}
+
+.xf-upload-thumb {
+    background-image: url(../images/ajax.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.xf-upload-progress {
+    position: absolute;
+    top: 0px; left: 0px;
+    color: #ffffff;
+    padding: 5px;
+}
+
+.xf-upload-progressbar {
+    background-color: rgba(24, 147, 243, 0.5);
+    width:100%;
+    height: 100%;
+    position: absolute;
+    top: 0px; right:0px;
+}
+
+.xf-upload-overlay {    
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0; left:0;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.xf-upload-abort {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    cursor: pointer;
+    padding: 5px;
+    color: #ffffff;
+}
+
+/*delete and rename confirm*/
+
+.xf-actionlayer-confirm {
+    background-color: rgba(0,0,0,0.8);
+    color: #ffffff;
+    position: absolute;
+    width: 100%; height:100%;
+    z-index: 1000;
+    text-align: center;
+    top: 0; left:0;
+}
+
+.xf-actionlayer-confirm input[type='text'] {
+    padding: 4px 4px;
+    border: none;
+    width: 90%;
+}
+
+.xf-actionlayer-message {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 6px 8px;
+    font-size: 14px;
+}
+
+a.xf-actionlayer-yes, a.xf-actionlayer-no {
+    padding: 5px;
+    margin: 1px;
+    background-color: #383838;
+    text-decoration: none;
+    color: #989898;
+    border-radius: 3px;
+    
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    -o-transition: all 0.4s;
+}
+
+a.xf-actionlayer-yes:hover {
+    background-color: #32a3a7;
+    color: #ffffff;
+}
+
+a.xf-actionlayer-no:hover {
+    background-color: #32a3a7;
+    color: #ffffff;
+}
+
+.xf-actionlayer-progress {
+    background-image: url(../images/ajax-black.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/*-------------*/
+
+/*loading overlay*/
+.xf-loading-overlay {
+    position: fixed;
+    top: 0; left:0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    background-image: url(../images/ajax-black.gif);
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/*drop overlay*/
+.xf-drop-overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%; height: 100%;
+    top: 50px; left: 0px;
+    text-align: center;
+    color: #d8d8d8;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+.xf-drop-overlay h1 {
+    letter-spacing: 2px;
+}
+
+.xf-icon-button {
+    cursor: pointer;
+    padding: 7px 5px 5px 5px;
+    border: #d8d8d8 1px solid;
+    display:inline-block;
+    background-color: #f0f0f0;
+    
+    color: #686868;
+    margin: 0px;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.xf-icon-button:hover {
+    border: #d8d8d8 1px solid;
+    color: #000000;
+    background-color: #ffffff;
+}
+
+a.xf-button-toggle {    
+    background-color: #333333;
+    border: #000000 1px solid;
+    color: #ffffff;
+}
+
+a.xf-button-toggle:hover {
+    background-color: #686868 !important;
+    border: #000000 1px solid;
+    color: #ffffff !important;
+}
+
+.xf-icon-right {
+    float: right;
+    margin-right: 15px;
+}
+
+/* options */
+
+.xf-options {
+    position:fixed;
+    display: none;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: #000000 1px solid;    
+    color: #ffffff;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 100%;
+    width: 250px;
+    right: 0px;
+}
+
+.xf-options .xf-option-item {
+    display: block;
+    margin: 1px;
+    cursor: pointer;    
+    padding: 6px;
+    border-bottom: #383838 1px solid;
+    text-decoration: none;
+    color: #ffffff;
+    
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    -o-transition: all 0.4s;    
+
+}
+
+.xf-options .xf-option-item:hover {
+    background-color: rgba(220,220,220,0.8);
+}
+
+.xf-option-selected {
+    background-color: rgba(50,163,167,0.8);
+}
+
+.xf-option-selected:hover {
+    background-color: rgba(108,210,210,0.8) !important;
+}
+
+.xf-sel-filter{
+    display: inline-block;
+    text-transform: capitalize;
+    font-weight: bold;
+    color: #686868;
+}
+
+/* Font Icon - fontello */
+
+@font-face {
+    font-family: 'xffontello';
+    src: url('./font/fontello.eot?4101935');
+    src: url('./font/fontello.eot?4101935#iefix') format('embedded-opentype'),
+         url('./font/fontello.woff?4101935') format('woff'),
+         url('./font/fontello.ttf?4101935') format('truetype'),
+         url('./font/fontello.svg?4101935#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.xf-icon {
+    font-family: "xffontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;    
+
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    margin-left: .2em;
+
+    /* You can be more comfortable with increased icons size */
+    font-size: 120%;
+
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}  

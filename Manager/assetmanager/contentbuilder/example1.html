@@ -1,0 +1,133 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">  
+    <link rel="shortcut icon" href="#" /> 
+	<link rel="stylesheet" href="/hc/Manager/assetmanager/css/xprofiledialog.css" />   
+    <link href="/hc/Manager/assets/minimalist-blocks/content.css" rel="stylesheet" type="text/css" />
+    <link href="/hc/Manager/contentbuilder/contentbuilder.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        .container {  margin: 150px auto; max-width: 800px; width:100%; padding:0 35px; box-sizing: border-box;}
+    </style>
+</head>
+<body>
+
+<!-- This is just a sample content. Content can be loaded from a database. -->
+<div class="container">
+    <div class="row clearfix"><div class="column half"><div class="display">
+        <p class="size-18 " style="text-transform: uppercase;">A Beautiful Day in November</p>
+        <h1 class="size-50">The Weels Are Spinning.</h1>
+    </div>
+    <p class="size-16 ">— By Casey Lansford</p></div><div class="column half"><img src="/hc/conteudo/tabela-fccr.jpg" alt=""></div></div><div class="row clearfix"><div class="column full"><div class="spacer height-60 "></div></div></div>
+        
+        
+        <div class="row clearfix">
+            <div class="column half">
+                <p style="text-align: justify;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            </div>
+            <div class="column half">
+                <p style="text-align: justify;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            </div>
+        </div>
+    <div class="row clearfix"><div class="column full"><div class="spacer height-40"></div></div></div>
+</div>
+
+<div class="is-tool" style="position:fixed;width:400px;height:50px;border:none;top:auto;bottom:30px;left:30px;right:auto;display:flex">
+    <button id="btnDestroy" class="classic" style="height:50px;">Destroy</button>
+    <button id="btnInit" class="classic" style="height:50px;">Init</button>
+    <button id="btnConfig" class="classic" style="height:50px;">Config</button>
+    <button id="btnGetHtml" class="classic" style="height:50px;">HTML</button>
+</div>
+<script src="/hc/Manager/assetmanager/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/hc/Manager/assetmanager/xprofile_lang.js" type="text/javascript"></script>
+<script src="/hc/Manager/assetmanager/xprofiledialog.js" type="text/javascript"></script>
+
+<script src="/hc/Manager/contentbuilder/lang/en.js" type="text/javascript"></script>
+<script src="/hc/Manager/contentbuilder/contentbuilder.min.js" type="text/javascript"></script>
+<script src="/hc/Manager/assets/minimalist-blocks/content.js" type="text/javascript"></script> <!-- Snippets file -->
+
+<script>
+    var builder = new ContentBuilder({
+        container: '.container',
+        builderMode: '',
+        toolbar: 'top',
+        columnTool: true,
+        rowTool: 'right',
+        elementTool: true,
+        snippetAddTool: true,
+        outlineMode: '',
+        rowcolOutline: true,
+        outlineStyle: '',
+        elementHighlight: true,
+        snippetOpen: false,
+        toolStyle: '',
+        snippetsSidebarDisplay: 'auto',
+        clearPreferences: true, //reset settings on load
+        //See readme.txt for more
+
+										onFileSelectClick: function(selEv) {
+											dlg = new XPROFileDialog({
+												url: "assetmanager/assetmain.php",
+												onSelect: function(data) {							
+													var inp = jQuery(selEv.targetInput).val(data.url);
+												}
+											});
+											dlg.open();
+										},
+
+										onImageSelectClick: function(selEv) {
+											dlg = new XPROFileDialog({
+												url: "assetmanager/assetmain.php",
+												onSelect: function(data) {					
+													var inp = jQuery(selEv.targetInput).val(data.url);
+												}
+											});
+											dlg.open();
+										},
+
+										toolbar: 'left'
+
+    });
+
+    var btnInit = document.querySelector('#btnInit');
+    btnInit.addEventListener('click', function(){
+        if(builder.builderStuff) return;
+        
+        builder = new ContentBuilder({ // Init
+            container: '.container'
+        });
+    });
+
+    var btnDestroy = document.querySelector('#btnDestroy');
+    btnDestroy.addEventListener('click', function(){
+        builder.destroy(); // Destroy
+    });
+    
+    var btnGetHtml = document.querySelector('#btnGetHtml');
+    btnGetHtml.addEventListener('click', function(){
+        if(!builder.builderStuff) {
+            alert('Builder is destroyed. Please click the Init button');
+            return;
+        }
+
+        var html = builder.html(); // get HTML
+        alert(html)
+    });
+    
+    var btnConfig = document.querySelector('#btnConfig');
+    btnConfig.addEventListener('click', function(){
+        if(!builder.builderStuff) {
+            alert('Builder is destroyed. Please click the Init button');
+            return;
+        }
+
+        builder.viewConfig(); // open Configuration
+    });
+</script>
+
+</body>
+</html>

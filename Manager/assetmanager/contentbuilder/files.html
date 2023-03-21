@@ -1,0 +1,99 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Images</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content=""> 
+    <style>
+        body {
+            font-family:sans-serif;
+            font-weight: 300;
+            font-size:13px;
+            color:#111;
+        }
+        #files {
+            opacity:0;
+            margin:20px;
+            display: flex;
+            flex-flow: wrap;
+        }
+        #files a {
+            display:inline-block;margin:3px;padding:10px 10px;box-sizing:border-box;text-decoration:none;color:#111;
+            display: flex;
+            width: 120px;
+            flex-direction: column;
+            align-items: center;
+        }
+        #files a svg {
+            width:50px;
+            height:50px;
+            fill:#111;
+            margin-bottom:8px;
+        }
+    </style> 
+</head>
+<body>
+
+<div id="files">
+    <a href="uploads/file1.pdf">
+        <svg> 
+            <use xlink:href="#ion-document"></use>
+        </svg>
+        file1.pdf
+    </a>
+    <a href="uploads/file2.zip">
+        <svg> 
+            <use xlink:href="#ion-document"></use>
+        </svg>
+        file2.zip
+    </a>
+    <a href="uploads/file3.txt">
+        <svg> 
+            <use xlink:href="#ion-document"></use>
+        </svg>
+        file3.txt
+    </a>
+</div>
+
+<svg width="0" height="0" style="position:absolute;display:none;">
+    <defs>
+        <symbol viewBox="0 0 512 512" id="ion-document"><path d="M399.3 168.9c-.7-2.9-2-5-3.5-6.8l-83.7-91.7c-1.9-2.1-4.1-3.1-6.6-4.4-2.9-1.5-6.1-1.6-9.4-1.6H136.2c-12.4 0-23.7 9.6-23.7 22.9v335.2c0 13.4 11.3 25.9 23.7 25.9h243.1c12.4 0 21.2-12.5 21.2-25.9V178.4c0-3.6-.4-6.2-1.2-9.5zM305.5 111l58 63.5h-58V111zm-161 305.5v-320h129v81.7c0 14.8 13.4 28.3 28.1 28.3h66.9v210h-224z"></path></symbol>
+    </defs>
+</svg>
+
+<script>
+    // ----------- Do Not Remove -------------
+    // When changing light to dark theme, this page color will be inferted. 
+    // This block prevent images to be inverted by inverting back:
+    var filter = window.getComputedStyle(parent.document.querySelector('.fileselect iframe')).getPropertyValue('filter');
+    var cssAdjust = '';
+    var elms = document.querySelectorAll('img');
+    if(filter.indexOf('invert(1)')!==-1){
+        elms.forEach(function(elm){
+            elm.style.filter = 'invert(1)';
+        });
+    }
+    document.querySelector('#files').style.opacity = '1';
+    // ----------- /Do Not Remove -------------
+
+    var links = document.querySelectorAll('#files a');
+    [].forEach.call(links, function(link) {
+        
+        var fileurl = link.getAttribute('href');
+        link.addEventListener('click', (e) => {
+            
+            /* 
+            USE THIS FUNCTION TO SELECT CUSTOM ASSET WITH CUSTOM VALUE TO RETURN 
+            An asset can be a file, an image or a page in your own CMS
+            */
+            parent.selectFile(fileurl);
+            
+            e.preventDefault();
+            
+        });
+
+    });
+</script>
+</body>
+</html>
