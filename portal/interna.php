@@ -173,7 +173,7 @@ inicio();
 	</div>
 
 	<?php
-	require_once(getenv("ATUALIZA_MANAGER_MAIN_DIR") . "/Manager/salva_conteudo.php");
+	require_once($_SERVER["DOCUMENT_ROOT"] . getenv("ATUALIZA_MANAGER_MAIN_DIR") . "/Manager/salva_conteudo.php");
 	require_once('../portal/incs/rodape.php');
 	?>
 </body>
