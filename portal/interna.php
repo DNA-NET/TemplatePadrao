@@ -1,66 +1,66 @@
-<?php 
-	require_once $_SERVER["DOCUMENT_ROOT"] . "/config.php"; 
-	inicio(); 
+<?php
+require_once $_SERVER["DOCUMENT_ROOT"] . "/config.php";
+inicio();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-    <link href="../Manager/contentbuilder/contentbuilder.css" rel="stylesheet" type="text/css" />
-    <?php require_once('../portal/incs/Cabecalho.php'); ?>
+	<link href="../Manager/contentbuilder/contentbuilder.css" rel="stylesheet" type="text/css" />
+	<?php require_once('../portal/incs/Cabecalho.php'); ?>
 </head>
 
 <body id="pagina_interna" class="smoothscroll">
 
-    <div id="wrapper">
-        <?php require_once('../portal/incs/Menu.php'); ?>
+	<div id="wrapper">
+		<?php require_once('../portal/incs/Menu.php'); ?>
 
-        <div id="corpo_pagina">
+		<div id="corpo_pagina">
 
-            <!-- PAGE TOP -->
-            <section class="page-title">
-                <div class="container">
+			<!-- PAGE TOP -->
+			<section class="page-title">
+				<div class="container">
 
-                    <header>
+					<header>
 
-                        <ul class="breadcrumb">
-                            <!-- breadcrumb -->
-                            <?php if (isset($_SESSION["navegacao"])) echo $_SESSION["navegacao"]; ?>
-                        </ul><!-- /breadcrumb -->
+						<ul class="breadcrumb">
+							<!-- breadcrumb -->
+							<?php if (isset($_SESSION["navegacao"])) echo $_SESSION["navegacao"]; ?>
+						</ul><!-- /breadcrumb -->
 
-                        <h2>
-                            <!-- Page Title -->
-                           <?php if (isset($_SESSION["secao_nome"])) echo "" . $_SESSION["secao_nome"]; ?>
-                        </h2><!-- /Page Title -->
+						<h2>
+							<!-- Page Title -->
+							<?php if (isset($_SESSION["secao_nome"])) echo "" . $_SESSION["secao_nome"]; ?>
+						</h2><!-- /Page Title -->
 
-                    </header>
+					</header>
 
-                </div>
-            </section>
-            <!-- /PAGE TOP -->
+				</div>
+			</section>
+			<!-- /PAGE TOP -->
 
-            <?php
+			<?php
 			echo Conteudo("banner_secao");
 			?>
 
 
-            <section>
+			<section>
 				<div class="container">
 
-                    <!--<form  method="post" class="sky-form">-->
+					<!--<form  method="post" class="sky-form">-->
 
-                    <?php
+					<?php
 					if (isset($_SESSION["secao_descricao"])) {
-						if($_SESSION["secao_descricao"] != '') echo '<p class="margin-bottom40">' . $_SESSION["secao_descricao"] . "</p>";
+						if ($_SESSION["secao_descricao"] != '') echo '<p class="margin-bottom40">' . $_SESSION["secao_descricao"] . "</p>";
 						$_SESSION["secao_descricao"] = '';
 					}
 
 					//echo $_SESSION["secao_link"];
-					//if(isset($_SESSION["secao_descricao"])) echo "<h4 style='margin-bottom:30px;'>" . $_SESSION["secao_descricao"] . "</h4>"; 
+					//if(isset($_SESSION["secao_descricao"])) echo "<h4 style='margin-bottom:30px;'>" . $_SESSION["secao_descricao"] . "</h4>";
 
-					
+
 					$secao_menu_id = "";
-					if(isset($_SESSION["secao_dna"])){
+					if (isset($_SESSION["secao_dna"])) {
 
 						//========================================================================================================
 						// Exibe detalhe de um conteúdo específico
@@ -73,8 +73,8 @@
 
 					//Prepara apontamento para conteúdo no caso de PREVIEW
 					if (isset($_REQUEST["preview"])) {
-						$_SESSION["campo"] = $_REQUEST["id"]; 
-						Busca_secao($_REQUEST["secao_id"],'');
+						$_SESSION["campo"] = $_REQUEST["id"];
+						Busca_secao($_REQUEST["secao_id"], '');
 					}
 
 					if ($_SESSION["campo"] != "" && $_SESSION["campo"] != "0") {
@@ -86,14 +86,14 @@
 						}
 
 						if ($_SESSION["secao_link"] == 'lista_noticias' || $_SESSION["secao_link"] == 'lista_unidades') {
-							$conteudo_pagina = str_replace('column full','',Conteudo($template_interna));
+							$conteudo_pagina = str_replace('column full', '', Conteudo($template_interna));
 						} else {
 							$conteudo_pagina = Conteudo($template_interna);
 						}
 
 						echo $conteudo_pagina;
 
-						
+
 
 
 						//========================================================================================================
@@ -127,26 +127,23 @@
 								}
 
 								echo $conteudo_pagina;
-
-								} else {
-									echo Conteudo("interna");
-								}
-							
+							} else {
+								echo Conteudo("interna");
+							}
 						} else {
 
 							echo "Página não encontrada!";
 						}
 
-						if(isset($_SESSION["secao_dna"])){
+						if (isset($_SESSION["secao_dna"])) {
 							if ($secao_menu_id != "") echo  '</div></div>';
 						}
-
 					}
 
-					
+
 					// Carrega NOTICIAS relacionadas
-					$noticias_relacionadas = Conteudo("lista_noticias_relacionadas"); 
-					if($noticias_relacionadas != '<!-- -->') {
+					$noticias_relacionadas = Conteudo("lista_noticias_relacionadas");
+					if ($noticias_relacionadas != '<!-- -->') {
 					?>
 						<div class="margem_texto margin-top40">
 							<h4>Notícias <strong>Relacionadas</strong> <a href="/hc/institucional/noticias" style="margin-left:10px;"><i class="fa fa-plus-circle" style="color: #D3D92B;"></i></a></h4>
@@ -154,7 +151,7 @@
 								<?php echo $noticias_relacionadas; ?>
 							</div>
 						</div>
-					<?php 
+					<?php
 					}
 					?>
 
@@ -163,21 +160,21 @@
 
 
 
-            </section>
+			</section>
 
 
-			<?php 
-			
-			 
+			<?php
+
+
 			?>
 
-            
-        </div>
-    </div>
-	
-	<?php 
-	require_once('../Manager/salva_conteudo.php'); 
-	require_once('../portal/incs/rodape.php'); 
+
+		</div>
+	</div>
+
+	<?php
+	require_once(getenv("ATUALIZA_MANAGER_MAIN_DIR") . "/Manager/salva_conteudo.php");
+	require_once('../portal/incs/rodape.php');
 	?>
 </body>
 
