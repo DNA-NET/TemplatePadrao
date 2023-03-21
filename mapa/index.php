@@ -1,5 +1,7 @@
-<?php require_once('../Manager/conexao.php'); ?>
-
+<?php 
+	require_once $_SERVER["DOCUMENT_ROOT"] . "/config.php"; 
+	inicio(); 
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
