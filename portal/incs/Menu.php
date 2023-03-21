@@ -1,5 +1,3 @@
-<?php //require_once('../Manager/conexao.php');?>
-
 <div vw class="enabled hidden-xs hidden-sm">
     <div vw-access-button class="active"></div>
     <div vw-plugin-wrapper>
@@ -65,10 +63,10 @@ if(!isset($_SESSION["secao_id"])) $_SESSION["secao_id"] = "0";
 													<a href="<?php echo $Dominio_Pasta_menu; ?>/mapa" aria-label="mapa" title="mapa" alt="mapa">Mapa do Site</a>
 												</li>
 												<li class="item-menu-superior">
-													<a style="" href="<?php echo $Dominio_Pasta_menu; ?>/acessibilidade" title="Acessibilidade" alt="Acessibilidade"><i class="fa fa-wheelchair" style="font-weight: bold;"></i></a>
+													<a href="<?php echo $Dominio_Pasta_menu; ?>/acessibilidade" title="Acessibilidade" alt="Acessibilidade"><i class="fa fa-wheelchair" style="font-weight: bold;"></i></a>
 												</li>
 												<li class="item-menu-superior">
-													<a style="" href="#" id="auto-contraste" onclick="auto_contraste();" title="Auto-contraste" alt="Auto-contraste"><i class="icon ion-contrast" style="font-weight: bold;"></i></a>
+													<a href="#" id="auto-contraste" onclick="auto_contraste();" title="Auto-contraste" alt="Auto-contraste"><i class="icon ion-contrast" style="font-weight: bold;"></i></a>
 												</li>
 											</ul>
 										</div>
